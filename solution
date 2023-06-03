@@ -1,0 +1,17 @@
+export LOCATION=
+export ID=
+
+gcloud dataplex lakes create sensors \
+    --location=$LOCATION \
+    --display-name="sensors" \
+    --description="Ecommerce Domain"
+
+
+gcloud alpha dataplex lakes create orders-lake --location=us-central1
+
+gcloud alpha dataplex lakes list --location=us-central1
+
+gcloud alpha dataplex zones create customer-curated-zone --lake=orders-lake --location=us-central1 --type=CURATED --resource-location-type=MULTI_REGION
+
+
+gcloud alpha dataplex zones list --lake=orders-lake --location=us-central1
