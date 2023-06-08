@@ -1,10 +1,13 @@
+export LOCATION=
+export ID=
+
 gcloud dataplex lakes create orders-lake \
-   --location=*************us-central1************ \
+   --location=$LOCATION \
    --display-name="Orders Lake"
 
 
 gcloud dataplex zones create customer-curated-zone \
-    --location=************us-central1*************** \
+    --location=$LOCATION \
     --lake=orders-lake \
     --display-name="Customer Curated Zone" \
     --type=CURATED \
@@ -12,9 +15,9 @@ gcloud dataplex zones create customer-curated-zone \
 
 
 gcloud dataplex assets create customer-details-dataset \
---location=***************us-central1********************* \
+--location=$LOCATION \
 --lake=orders-lake \
 --zone=customer-curated-zone \
 --display-name="Customer Details Dataset" \
 --resource-type=BIGQUERY_DATASET \
---resource-name=projects/***********qwiklabs-gcp-01-420443e122b6****************/datasets/customers
+--resource-name=projects/$ID/datasets/customers
