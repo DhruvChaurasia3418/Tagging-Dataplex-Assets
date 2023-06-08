@@ -1,17 +1,20 @@
-export LOCATION=
-export ID=
-
-gcloud dataplex lakes create sensors \
-    --location=$LOCATION \
-    --display-name="sensors" \
-    --description="Ecommerce Domain"
+gcloud dataplex lakes create orders-lake \
+   --location=*************us-central1************ \
+   --display-name="Orders Lake"
 
 
-gcloud alpha dataplex lakes create orders-lake --location=us-central1
+gcloud dataplex zones create customer-curated-zone \
+    --location=************us-central1*************** \
+    --lake=orders-lake \
+    --display-name="Customer Curated Zone" \
+    --type=CURATED \
+    --resource-location-type=SINGLE_REGION
 
-gcloud alpha dataplex lakes list --location=us-central1
 
-gcloud alpha dataplex zones create customer-curated-zone --lake=orders-lake --location=us-central1 --type=CURATED --resource-location-type=MULTI_REGION
-
-
-gcloud alpha dataplex zones list --lake=orders-lake --location=us-central1
+gcloud dataplex assets create customer-details-dataset \
+--location=***************us-central1********************* \
+--lake=orders-lake \
+--zone=customer-curated-zone \
+--display-name="Customer Details Dataset" \
+--resource-type=BIGQUERY_DATASET \
+--resource-name=projects/***********qwiklabs-gcp-01-420443e122b6****************/datasets/customers
