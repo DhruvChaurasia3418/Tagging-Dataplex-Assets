@@ -21,3 +21,6 @@ gcloud dataplex assets create customer-details-dataset \
 --display-name="Customer Details Dataset" \
 --resource-type=BIGQUERY_DATASET \
 --resource-name=projects/$ID/datasets/customers
+
+
+gcloud services enable datacatalog.googleapis.com
